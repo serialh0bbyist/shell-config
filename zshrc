@@ -97,9 +97,11 @@ export CODE="${HOME}/Documents/code/${EMPLOYER}"
 
 # Custom Functions
 refresh_code () {
-  for repo in $(ls -d */); do
-    cd ${CODE}/$i
-    git pull --prune
+  for repo in $(ls -d ${CODE}/*/); do
+    echo "Updating repo ${repo}..."
+    cd ${repo}
+    local head_branch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
+    git fetch --prune origin ${head_branch}
   done
 }
 
