@@ -97,9 +97,7 @@ export CODE="${HOME}/Documents/code/${EMPLOYER}"
 
 # Custom Functions
 refresh_code () {
-  cd ${CODE}/tf-mod-github-repos
-  git pull --prune
-  for tf_repo in $(grep "^[[:space:]]*repo_name" ${CODE}/tf-mod-github-repos/repos.tf | awk -F\" '{print $2}'); do
+  for repo in $(ls -d */); do
     cd ${CODE}/$i
     git pull --prune
   done
