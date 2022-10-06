@@ -100,8 +100,11 @@ refresh_code () {
   for repo in $(ls -d ${CODE}/*/); do
     echo "Updating repo ${repo}..."
     cd ${repo}
+    local current_branch=$(git branch --show-current)
     local head_branch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
-    git fetch --prune origin ${head_branch}
+    git checkout ${head_branch}
+    git pull --prune origin ${head_branch}
+    git checkout ${current_branch}
   done
 }
 
